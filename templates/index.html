@@ -1,0 +1,100 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gas Turbine TEY Predictor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input[type="number"] {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2e86de;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #1e70bf;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #27ae60;
+        }
+        .error {
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔋 TEY Prediction</h2>
+        <form method="post" action="/predict">
+            <label for="AT">Ambient Temperature (AT)</label>
+            <input type="number" name="AT" step="any" required>
+
+            <label for="AP">Ambient Pressure (AP)</label>
+            <input type="number" name="AP" step="any" required>
+
+            <label for="AH">Ambient Humidity (AH)</label>
+            <input type="number" name="AH" step="any" required>
+
+            <label for="AFDP">Air Filter DP (AFDP)</label>
+            <input type="number" name="AFDP" step="any" required>
+
+            <label for="GTEP">Gas Turbine Exhaust Pressure (GTEP)</label>
+            <input type="number" name="GTEP" step="any" required>
+
+            <label for="TIT">Turbine Inlet Temperature (TIT)</label>
+            <input type="number" name="TIT" step="any" required>
+
+            <label for="TAT">Turbine After Temperature (TAT)</label>
+            <input type="number" name="TAT" step="any" required>
+
+            <input type="submit" value="Predict TEY">
+        </form>
+
+        {% if prediction %}
+            <div class="result">{{ prediction }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
